@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Launch Checklist</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --accent-bg: #eff6ff;
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 1.875rem;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .progress-container {
+            margin-bottom: 2rem;
+            background: var(--accent-bg);
+            padding: 1rem;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .progress-bar-background {
+            flex-grow: 1;
+            height: 10px;
+            background-color: #dbeafe;
+            border-radius: 5px;
+            margin: 0 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+            min-width: 45px;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #94a3b8;
+            border-radius: 4px;
+            margin-right: 12px;
+            margin-top: 2px;
+            cursor: pointer;
+            display: grid;
+            place-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .checklist-item input[type="checkbox"]::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--card-bg);
+            background-color: var(--card-bg);
+            transform-origin: bottom left;
+            clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        }
+
+        .checklist-item input[type="checkbox"]:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .checklist-item input[type="checkbox"]:checked::before {
+            transform: scale(1);
+        }
+
+        .item-content {
+            flex-grow: 1;
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .checklist-item input[type="checkbox"]:checked + .item-content .item-title {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .item-desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .container {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Website Publishing Checklist</h1>
+        <p class="subtitle">A structured pre-launch and post-launch roadmap for web deployment.</p>
+    </header>
+
+    <div class="progress-container">
+        <span class="progress-text" id="progress-count">0 / 0</span>
+        <div class="progress-bar-background">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+        <span class="progress-text" id="progress-percent">0%</span>
+    </div>
+
+    <main id="checklist-content">
+        <!-- Section 1 -->
+        <div class="section">
+            <h2 class="section-title">1. Domain & DNS Management</h2>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-1">
+                    <div class="item-content">
+                        <label for="task-1" class="item-title">Domain Registration</label>
+                        <p class="item-desc">Confirm domain ownership, enable auto-renewal, and update WHOIS privacy protection settings.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-2">
+                    <div class="item-content">
+                        <label for="task-2" class="item-title">DNS Record Configuration</label>
+                        <p class="item-desc">Point A, AAAA, or CNAME records to the hosting server IP address and allow for propagation time.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-3">
+                    <div class="item-content">
+                        <label for="task-3" class="item-title">Domain Redirection (www vs non-www)</label>
+                        <p class="item-desc">Set up a canonical redirect rule to ensure traffic consistently routes to your preferred URL format.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="section">
+            <h2 class="section-title">2. Hosting & Environment Setup</h2>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-4">
+                    <div class="item-content">
+                        <label for="task-4" class="item-title">Server Provisioning</label>
+                        <p class="item-desc">Verify web server allocation, PHP/Node environment versions, and database availability.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-5">
+                    <div class="item-content">
+                        <label for="task-5" class="item-title">Custom Error Pages</label>
+                        <p class="item-desc">Configure user-friendly 404 (Not Found) and 500 (Server Error) pages with clear navigation options.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="section">
+            <h2 class="section-title">3. File Preparation & Assets</h2>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-6">
+                    <div class="item-content">
+                        <label for="task-6" class="item-title">Asset Optimization</label>
+                        <p class="item-desc">Compress images (WebP/JPEG formats), minify HTML, CSS, and JS files, and clean unused assets.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-7">
+                    <div class="item-content">
+                        <label for="task-7" class="item-title">Favicon & Touch Icons</label>
+                        <p class="item-desc">Upload favicons in multiple dimensions (.ico, .png) and configure Apple Touch icons in the `<head>` tag.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-8">
+                    <div class="item-content">
+                        <label for="task-8" class="item-title">Sitemap & Robots.txt</label>
+                        <p class="item-desc">Generate an `sitemap.xml` file and verify `robots.txt` is not blocking necessary search engine crawlers.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="section">
+            <h2 class="section-title">4. Security & HTTPS Integration</h2>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-9">
+                    <div class="item-content">
+                        <label for="task-9" class="item-title">SSL/TLS Certificate Installation</label>
+                        <p class="item-desc">Install an active SSL certificate (e.g., Let's Encrypt) to serve site assets securely over HTTPS.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-10">
+                    <div class="item-content">
+                        <label for="task-10" class="item-title">HTTP to HTTPS Redirects</label>
+                        <p class="item-desc">Enforce 301 redirects for all incoming HTTP requests to their secure HTTPS counterparts.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-11">
+                    <div class="item-content">
+                        <label for="task-11" class="item-title">Security Headers & Protection</label>
+                        <p class="item-desc">Set security headers (X-Content-Type-Options, X-Frame-Options) and implement form captcha/spam protection.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="section">
+            <h2 class="section-title">5. Compatibility, Testing & Links</h2>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-12">
+                    <div class="item-content">
+                        <label for="task-12" class="item-title">Cross-Browser Testing</label>
+                        <p class="item-desc">Verify visual rendering and layout functionality across Chrome, Firefox, Safari, and Edge.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-13">
+                    <div class="item-content">
+                        <label for="task-13" class="item-title">Mobile & Responsive Compatibility</label>
+                        <p class="item-desc">Test UI responsiveness across smartphone, tablet, and desktop breakpoints using viewport meta tags.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-14">
+                    <div class="item-content">
+                        <label for="task-14" class="item-title">Link & Navigation Validation</label>
+                        <p class="item-desc">Run a link checker to confirm all internal links, external links, social icons, and anchor tags function correctly.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-15">
+                    <div class="item-content">
+                        <label for="task-15" class="item-title">Functional Form Verification</label>
+                        <p class="item-desc">Test all contact forms, checkout flows, email notifications, and auto-responders end-to-end.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="section">
+            <h2 class="section-title">6. Performance Optimization</h2>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-16">
+                    <div class="item-content">
+                        <label for="task-16" class="item-title">Core Web Vitals Audit</label>
+                        <p class="item-desc">Run Google PageSpeed Insights or Lighthouse tests to measure LCP, FID/INP, and CLS scores.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-17">
+                    <div class="item-content">
+                        <label for="task-17" class="item-title">Caching & CDN Setup</label>
+                        <p class="item-desc">Enable browser caching headers and route static assets through a Content Delivery Network (e.g., Cloudflare).</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="section">
+            <h2 class="section-title">7. Backups & Post-Launch Maintenance</h2>
+            <ul class="checklist">
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-18">
+                    <div class="item-content">
+                        <label for="task-18" class="item-title">Full Production Backup</label>
+                        <p class="item-desc">Create a clean baseline snapshot of site files and database tables prior to public exposure.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-19">
+                    <div class="item-content">
+                        <label for="task-19" class="item-title">Automated Backup Schedule</label>
+                        <p class="item-desc">Set up daily or weekly off-site automated backups with specified retention policies.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-20">
+                    <div class="item-content">
+                        <label for="task-20" class="item-title">Analytics & Console Integration</label>
+                        <p class="item-desc">Connect web analytics tools and submit your sitemap to Google Search Console for indexing.</p>
+                    </div>
+                </li>
+                <li class="checklist-item">
+                    <input type="checkbox" id="task-21">
+                    <div class="item-content">
+                        <label for="task-21" class="item-title">Maintenance Plan Setup</label>
+                        <p class="item-desc">Establish regular schedules for software core updates, plugin patches, and uptime monitoring alerts.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        Website Publishing Checklist &bull; Keep this reference handy for deployment workflows.
+    </footer>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        const progressBar = document.getElementById("progress-bar");
+        const progressCount = document.getElementById("progress-count");
+        const progressPercent = document.getElementById("progress-percent");
+
+        function updateProgress() {
+            const total = checkboxes.length;
+            let checkedCount = 0;
+
+            checkboxes.forEach(cb => {
+                if (cb.checked) checkedCount++;
+            });
+
+            const percentage = total === 0 ? 0 : Math.round((checkedCount / total) * 100);
+
+            progressBar.style.width = percentage + "%";
+            progressCount.textContent = `${checkedCount} / ${total}`;
+            progressPercent.textContent = `${percentage}%`;
+        }
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener("change", updateProgress);
+        });
+
+        updateProgress();
+    });
+</script>
+
+</body>
+</html>

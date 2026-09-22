@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Tech Fest Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #1e293b;
+            color: #ffffff;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        figure {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            width: 100%;
+            max-width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        figcaption {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            color: #475569;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Annual College Tech Fest 2026 - Highlights</h1>
+    </header>
+
+    <main>
+        <div class="gallery">
+            <figure>
+                <img src="inauguration.jpg" alt="Chief guest cutting the ribbon at the Tech Fest inauguration ceremony" width="300">
+                <figcaption>Opening ceremony ribbon-cutting event by the Chief Guest.</figcaption>
+            </figure>
+
+            <figure>
+                <img src="hackathon.jpg" alt="Students intensely coding on laptops during the 24-hour hackathon" width="300">
+                <figcaption>Participants during the 24-Hour Codefest Hackathon.</figcaption>
+            </figure>
+
+            <figure>
+                <img src="robotics.jpg" alt="Custom-built autonomous robot navigating an obstacle course" width="300">
+                <figcaption>Robo-Wars arena competition finals.</figcaption>
+            </figure>
+
+            <figure>
+                <img src="awards.jpg" alt="Winning team receiving trophies and prize certificates on stage" width="300">
+                <figcaption>Prize distribution ceremony at the valedictory function.</figcaption>
+            </figure>
+        </div>
+    </main>
+
+</body>
+</html>
